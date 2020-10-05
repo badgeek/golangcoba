@@ -1,0 +1,6 @@
+[psql]
+dbname = "dhnnghow"
+host="john.db.elephantsql.com"
+user="dhnnghow"
+pass="BOdXkc_qhqJdlAvEE6qvqchFtPLPwkMd"
+blacklist = ["migrations"]
