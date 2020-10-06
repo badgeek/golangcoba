@@ -3,6 +3,7 @@ package controller
 import (
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"strconv"
@@ -91,4 +92,24 @@ func ListVersion(w http.ResponseWriter, r *http.Request) {
 	} else {
 		w.Write(jsonResponse)
 	}
+}
+
+type Todo struct {
+	UserID    int    `json:"userId"`
+	ID        int    `json:"id"`
+	Title     string `json:"title"`
+	Completed bool   `json:"completed"`
+}
+
+func ListRate(w http.ResponseWriter, r *http.Request) {
+	resp, err := http.Get("https://jsonplaceholder.typicode.com/todos/1")
+	if err != nil {
+		log.Fatalln(err)
+	}
+	defer resp.Body.Close()
+	bodyBytes, _ := ioutil.ReadAll(resp.Body)
+	var todoStruct Todo
+	json.Unmarshal(bodyBytes, &todoStruct)
+	fmt.Printf("API Response as struct %+v\n", todoStruct)
+	w.Write(bodyBytes)
 }

@@ -24,7 +24,6 @@ func GetVersions() (models.AppVersionSlice, error) {
 
 //IsVersionExist Get from db
 func IsVersionExist(id string) (bool, error) {
-	appstate.App.TestApp()
 	verID := null.StringFrom(id)
 	queryModel := models.AppVersionWhere.Name.EQ(verID)
 	result, dbErr := models.AppVersions(queryModel).Count(ctx, appstate.GetConnection())

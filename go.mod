@@ -7,6 +7,7 @@ require (
 	github.com/friendsofgo/errors v0.9.2
 	github.com/gofrs/uuid v3.3.0+incompatible // indirect
 	github.com/jmoiron/sqlx v1.2.0 // indirect
+	github.com/joho/godotenv v1.3.0 // indirect
 	github.com/lib/pq v1.8.0 // indirect
 	github.com/vattle/sqlboiler v2.5.0+incompatible // indirect
 	github.com/volatiletech/null v8.0.0+incompatible

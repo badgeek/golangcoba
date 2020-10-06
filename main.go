@@ -3,7 +3,9 @@ package main
 import (
 	"log"
 	"net/http"
+	"os"
 
+	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 	appstate "manticore.id/golangcoba/appstate"
 	controller "manticore.id/golangcoba/controller"
@@ -16,14 +18,23 @@ func setupHTTP() {
 	mux.HandleFunc("/versions", controller.ShowVersions)
 	mux.HandleFunc("/versions/create", controller.Create)
 	mux.HandleFunc("/versions/list", controller.ListVersion)
+	mux.HandleFunc("/versions/listrate", controller.ListRate)
 	err := http.ListenAndServe(":8000", mux)
 	log.Fatal(err)
 }
 
+func loadENV() {
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading env file")
+	}
+}
+
 func main() {
 	// Open handle to database like normal
+	loadENV()
 	appstate.SetupLog()
-	appstate.SetupDB("postgres://dhnnghow:BOdXkc_qhqJdlAvEE6qvqchFtPLPwkMd@john.db.elephantsql.com:5432/dhnnghow")
+	appstate.SetupDB(os.Getenv("DBCONFIG"))
 	appstate.ConnectDB()
 
 	// appstate.App.LogInfo = new log.l
